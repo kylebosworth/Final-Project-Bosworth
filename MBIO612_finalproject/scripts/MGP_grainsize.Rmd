@@ -3,12 +3,12 @@ title: "MBIO 612 Final Project - Grain Size Distribution - Wet vs. Dry Seasons"
 author: "Kyle Bosworth"
 date: "`r Sys.Date()`"
 output:
-  pdf_document:
-    toc: true
   html_document:
     toc: true
     toc_float: true
 ---
+
+
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE,
@@ -34,9 +34,8 @@ library(tidyr)
 ```{r}
 #Had to manually load grainsize data. For some reason I could not get R to read in my csv file.
 
-grainsize <- read.csv("/Users/boz/Desktop/Repositories/MGP_bosworth/data/grainsize.csv")
 
-grainsize <- read.csv(here("data", "grainsize.csv"))
+grainsize <- read.csv(here("MBIO612_finalproject","data", "grainsize.csv"))
 
 head(grainsize)
 
@@ -108,18 +107,18 @@ grainsize_filter <- grainsize_filter %>%
       "<strong>Site:</strong>", SiteName, "<br/>",
       "<strong>Zone:</strong>", Zone, "<br/>",
       "<strong>Coordinates:</strong><br/>",
-      "Lat: ", round(Lat, 6), "<br/>",
-      "Long: ", round(Long, 6), "<br/>",
+      "Lat: ", round(as.numeric(Lat), 6), "<br/>",
+      "Long: ", round(as.numeric(Long), 6), "<br/>",
       "<strong>Grain Size Distribution:</strong><br/>",
-      "Gravel: ", round(Gravel_pct, 1), "%<br/>",
-      "Coarse Sand: ", round(CoarseSand_pct, 1), "%<br/>",
-      "Medium Sand: ", round(MediumSand_pct, 1), "%<br/>",
-      "Fine Sand: ", round(FineSand_pct, 1), "%<br/>",
-      "Silt/Clay: ", round(SiltClay_pct, 1), "%<br/>",
+      "Gravel: ", round(as.numeric(Gravel_pct), 1), "%<br/>",
+      "Coarse Sand: ", round(as.numeric(CoarseSand_pct), 1), "%<br/>",
+      "Medium Sand: ", round(as.numeric(MediumSand_pct), 1), "%<br/>",
+      "Fine Sand: ", round(as.numeric(FineSand_pct), 1), "%<br/>",
+      "Silt/Clay: ", round(as.numeric(SiltClay_pct), 1), "%<br/>",
       "<strong>Environmental Parameters:</strong><br/>",
-      "Temperature: ", round(TempC, 2), "°C<br/>",
-      "Salinity: ", round(Salinity, 2), "<br/>",
-      "DO%: ", round(DO, 2)
+      "Temperature: ", round(as.numeric(TempC), 2), "°C<br/>",
+      "Salinity: ", round(as.numeric(Salinity), 2), "<br/>",
+      "DO.: ", round(as.numeric(`DO.`), 2)
     )
   )
 ```

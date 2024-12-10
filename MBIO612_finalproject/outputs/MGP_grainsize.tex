@@ -1,0 +1,349 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={MBIO 612 Final Project - Grain Size Distribution - Wet vs.~Dry Seasons},
+  pdfauthor={Kyle Bosworth},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{MBIO 612 Final Project - Grain Size Distribution - Wet vs.~Dry
+Seasons}
+\author{Kyle Bosworth}
+\date{2024-12-10}
+
+\begin{document}
+\maketitle
+
+{
+\setcounter{tocdepth}{2}
+\tableofcontents
+}
+\subsubsection{Load Libraries}\label{load-libraries}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(here)}
+\FunctionTok{library}\NormalTok{(tidyverse)}
+\FunctionTok{library}\NormalTok{(leaflet)}
+\FunctionTok{library}\NormalTok{(tidyr)}
+\end{Highlighting}
+\end{Shaded}
+
+\subsubsection{Read in Data}\label{read-in-data}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#Had to manually load grainsize data. For some reason I could not get R to read in my csv file.}
+
+
+\NormalTok{grainsize }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\FunctionTok{here}\NormalTok{(}\StringTok{"MBIO612\_finalproject"}\NormalTok{,}\StringTok{"data"}\NormalTok{, }\StringTok{"grainsize.csv"}\NormalTok{))}
+
+\FunctionTok{head}\NormalTok{(grainsize)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      Date SiteName Alt.site.name         Zone      Lat         Long TotalWeight
+## 1 10/1/22    MS_B9          P_01 Mullet South 21.43225 _157.8066923      36.708
+## 2 10/1/22   MS_B10          P_02 Mullet South 21.43336 _157.8062108      36.539
+## 3 10/1/22   MS_B11          P_03 Mullet South 21.43438   _157.80534      59.917
+## 4 10/1/22   ME_B13          P_04  Mullet East 21.43591   _157.80556      44.272
+## 5 10/1/22   ME_B14          P_05  Mullet East 21.43704   _157.80606      58.144
+## 6 10/1/22     <NA>          P_06         <NA> 21.43913   _157.80856      36.614
+##   Total. Gravel CoarseSand MediumSand FineSand SiltClay TempC   DO.   DO    SpC
+## 1    100 12.271     11.226     13.972   18.741   43.791  25.3  28.3 1.95 47.985
+## 2    100 32.646     21.761      9.925   24.244   11.424  26.2  34.9 2.37 48.185
+## 3    100 29.637     22.837      9.878   18.066   19.582  27.4  59.5 3.89 52.181
+## 4    100 39.237     40.258      9.724    6.388    4.392  27.6  80.8 5.25 52.832
+## 5    100 19.361     29.697      9.900   18.589   22.454  27.8 100.9 6.52 53.004
+## 6    100 13.160     15.923      5.271   15.953   49.693  27.4  67.1  4.4 50.854
+##   Salinity   pH Turbidity
+## 1    31.26 7.83      0.71
+## 2    31.38 7.92      0.75
+## 3    34.28 7.99      0.99
+## 4    34.76 8.20      0.88
+## 5    34.88 8.25      0.80
+## 6    33.30 7.90      2.44
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#Had a lot of trouble with my naming schemes in my data frame, here i just wanted to double check my names}
+\FunctionTok{str}\NormalTok{(grainsize}\SpecialCharTok{$}\NormalTok{SiteName)  }\CommentTok{\# Should show character vector with names as MW\_B5 not MW{-}B5}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  chr [1:79] "MS_B9" "MS_B10" "MS_B11" "ME_B13" "ME_B14" NA "MN_B1" "MW_B5" ...
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#Checked a few example site names too}
+\FunctionTok{head}\NormalTok{(}\FunctionTok{unique}\NormalTok{(grainsize}\SpecialCharTok{$}\NormalTok{SiteName))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "MS_B9"  "MS_B10" "MS_B11" "ME_B13" "ME_B14" NA
+\end{verbatim}
+
+\subsubsection{The Goal}\label{the-goal}
+
+I just wanted to focus on 2 sampling dates that occured in the dry and
+wet season, 9/14/23 and 12/20/23, my goald is to create map that will
+display grain size \% and WQ data in an interactive form. Iʻd like to me
+able to make a story map of sorts and each site will have a pop up
+window that displays info for that day.
+
+\subsubsection{Data Prep}\label{data-prep}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#I want to first clean and prepare my data to remove NAs, and focus on spcific dates}
+
+\NormalTok{grainsize\_filter }\OtherTok{\textless{}{-}}\NormalTok{ grainsize }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}
+    \AttributeTok{Long =} \FunctionTok{as.numeric}\NormalTok{(}\FunctionTok{gsub}\NormalTok{(}\StringTok{"\_"}\NormalTok{, }\StringTok{"{-}"}\NormalTok{, }\FunctionTok{as.character}\NormalTok{(Long))),}
+    \AttributeTok{Lat =} \FunctionTok{as.numeric}\NormalTok{(}\FunctionTok{as.character}\NormalTok{(Lat)) }\CommentTok{\#this converts my long/lat values to numeric to makes sure that they are read in coordinate format. I replaced my "hypnons "{-}" with underscores and didnʻt want to go back and edi out each cell.}
+\NormalTok{  ) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(Long), }\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(Lat)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(Date }\SpecialCharTok{\%in\%} \FunctionTok{c}\NormalTok{(}\StringTok{"9/14/23"}\NormalTok{, }\StringTok{"12/20/23"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%} \CommentTok{\# Remove rows where coordinates are NA and selecting for dates. }
+  \FunctionTok{mutate}\NormalTok{(}
+    \AttributeTok{Gravel\_pct =}\NormalTok{ (Gravel}\SpecialCharTok{/}\NormalTok{TotalWeight) }\SpecialCharTok{*} \DecValTok{100}\NormalTok{,}
+    \AttributeTok{CoarseSand\_pct =}\NormalTok{ (CoarseSand}\SpecialCharTok{/}\NormalTok{TotalWeight) }\SpecialCharTok{*} \DecValTok{100}\NormalTok{,}
+    \AttributeTok{MediumSand\_pct =}\NormalTok{ (MediumSand}\SpecialCharTok{/}\NormalTok{TotalWeight) }\SpecialCharTok{*} \DecValTok{100}\NormalTok{,}
+    \AttributeTok{FineSand\_pct =}\NormalTok{ (FineSand}\SpecialCharTok{/}\NormalTok{TotalWeight) }\SpecialCharTok{*} \DecValTok{100}\NormalTok{,}
+    \AttributeTok{SiltClay\_pct =}\NormalTok{ (SiltClay}\SpecialCharTok{/}\NormalTok{TotalWeight) }\SpecialCharTok{*} \DecValTok{100}
+\NormalTok{  )}
+\CommentTok{\#here i calculated my grain size \% based on total weight so that in my map i can view this as a percentage.}
+
+
+\CommentTok{\#I then thought that it might be easier to view all this dat if I made 2 different map. So i created 2 distinct seasonal data sets.}
+
+\NormalTok{dry\_season\_data }\OtherTok{\textless{}{-}}\NormalTok{ grainsize\_filter }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{filter}\NormalTok{(Date }\SpecialCharTok{==} \StringTok{"9/14/23"}\NormalTok{)}
+
+\NormalTok{wet\_season\_data }\OtherTok{\textless{}{-}}\NormalTok{ grainsize\_filter }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{filter}\NormalTok{(Date }\SpecialCharTok{==} \StringTok{"12/20/23"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\subsubsection{Creating a pop-up}\label{creating-a-pop-up}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#I would like to depict the sampling points on an interactive map that has a window that pops up when you click on a specific site. }
+
+\CommentTok{\#I did some researching and found that I could make a pop{-}up using "popup\_content" and structure the text using using html tags!}
+\CommentTok{\#the basics are as followed }
+
+
+\CommentTok{\#"\textless{}strong\textgreater{}" wraps the lables }
+\CommentTok{\#"\textless{}br/\textgreater{}" is a break and is used to create the next line}
+\CommentTok{\#round was used to round my percents, coordinates and data off to a degree.}
+
+
+
+\CommentTok{\#Line 1: "\textless{}strong\textgreater{}Environmental Parameters:\textless{}/strong\textgreater{}\textless{}br/\textgreater{}",}
+\CommentTok{\#Line 2: "\textless{}strong\textgreater{}Environmental Parameters:\textless{}/strong\textgreater{}\textless{}br/\textgreater{}",}
+
+
+\NormalTok{grainsize\_filter }\OtherTok{\textless{}{-}}\NormalTok{ grainsize\_filter }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}
+    \AttributeTok{popup\_content =} \FunctionTok{paste}\NormalTok{(}
+      \StringTok{"\textless{}strong\textgreater{}Site:\textless{}/strong\textgreater{}"}\NormalTok{, SiteName, }\StringTok{"\textless{}br/\textgreater{}"}\NormalTok{,}
+      \StringTok{"\textless{}strong\textgreater{}Zone:\textless{}/strong\textgreater{}"}\NormalTok{, Zone, }\StringTok{"\textless{}br/\textgreater{}"}\NormalTok{,}
+      \StringTok{"\textless{}strong\textgreater{}Coordinates:\textless{}/strong\textgreater{}\textless{}br/\textgreater{}"}\NormalTok{,}
+      \StringTok{"Lat: "}\NormalTok{, }\FunctionTok{round}\NormalTok{(}\FunctionTok{as.numeric}\NormalTok{(Lat), }\DecValTok{6}\NormalTok{), }\StringTok{"\textless{}br/\textgreater{}"}\NormalTok{,}
+      \StringTok{"Long: "}\NormalTok{, }\FunctionTok{round}\NormalTok{(}\FunctionTok{as.numeric}\NormalTok{(Long), }\DecValTok{6}\NormalTok{), }\StringTok{"\textless{}br/\textgreater{}"}\NormalTok{,}
+      \StringTok{"\textless{}strong\textgreater{}Grain Size Distribution:\textless{}/strong\textgreater{}\textless{}br/\textgreater{}"}\NormalTok{,}
+      \StringTok{"Gravel: "}\NormalTok{, }\FunctionTok{round}\NormalTok{(}\FunctionTok{as.numeric}\NormalTok{(Gravel\_pct), }\DecValTok{1}\NormalTok{), }\StringTok{"\%\textless{}br/\textgreater{}"}\NormalTok{,}
+      \StringTok{"Coarse Sand: "}\NormalTok{, }\FunctionTok{round}\NormalTok{(}\FunctionTok{as.numeric}\NormalTok{(CoarseSand\_pct), }\DecValTok{1}\NormalTok{), }\StringTok{"\%\textless{}br/\textgreater{}"}\NormalTok{,}
+      \StringTok{"Medium Sand: "}\NormalTok{, }\FunctionTok{round}\NormalTok{(}\FunctionTok{as.numeric}\NormalTok{(MediumSand\_pct), }\DecValTok{1}\NormalTok{), }\StringTok{"\%\textless{}br/\textgreater{}"}\NormalTok{,}
+      \StringTok{"Fine Sand: "}\NormalTok{, }\FunctionTok{round}\NormalTok{(}\FunctionTok{as.numeric}\NormalTok{(FineSand\_pct), }\DecValTok{1}\NormalTok{), }\StringTok{"\%\textless{}br/\textgreater{}"}\NormalTok{,}
+      \StringTok{"Silt/Clay: "}\NormalTok{, }\FunctionTok{round}\NormalTok{(}\FunctionTok{as.numeric}\NormalTok{(SiltClay\_pct), }\DecValTok{1}\NormalTok{), }\StringTok{"\%\textless{}br/\textgreater{}"}\NormalTok{,}
+      \StringTok{"\textless{}strong\textgreater{}Environmental Parameters:\textless{}/strong\textgreater{}\textless{}br/\textgreater{}"}\NormalTok{,}
+      \StringTok{"Temperature: "}\NormalTok{, }\FunctionTok{round}\NormalTok{(}\FunctionTok{as.numeric}\NormalTok{(TempC), }\DecValTok{2}\NormalTok{), }\StringTok{"°C\textless{}br/\textgreater{}"}\NormalTok{,}
+      \StringTok{"Salinity: "}\NormalTok{, }\FunctionTok{round}\NormalTok{(}\FunctionTok{as.numeric}\NormalTok{(Salinity), }\DecValTok{2}\NormalTok{), }\StringTok{"\textless{}br/\textgreater{}"}\NormalTok{,}
+      \StringTok{"DO.: "}\NormalTok{, }\FunctionTok{round}\NormalTok{(}\FunctionTok{as.numeric}\NormalTok{(}\StringTok{\textasciigrave{}}\AttributeTok{DO.}\StringTok{\textasciigrave{}}\NormalTok{), }\DecValTok{2}\NormalTok{)}
+\NormalTok{    )}
+\NormalTok{  )}
+\end{Highlighting}
+\end{Shaded}
+
+\subsubsection{Adding in the map + Heʻeia Fishpond
+Coordinates}\label{adding-in-the-map-heux2bbeia-fishpond-coordinates}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{heeia\_lat }\OtherTok{\textless{}{-}} \FloatTok{21.4351}  \CommentTok{\# This is the coordinates i used for my map layer}
+\NormalTok{heeia\_lng }\OtherTok{\textless{}{-}} \SpecialCharTok{{-}}\FloatTok{157.8060}
+
+\NormalTok{heeiamap }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(data, season\_name) \{}
+\NormalTok{  heeiamap\_data }\OtherTok{\textless{}{-}}\NormalTok{ data }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{filter}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(Long), }\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(Lat),}
+\NormalTok{           Long }\SpecialCharTok{\textless{}} \DecValTok{0}\NormalTok{,  }\CommentTok{\#makes sure that my longitude is negative (for Hawaiʻi), chk for me as my long had underscores}
+\NormalTok{           Long }\SpecialCharTok{\textgreater{}} \SpecialCharTok{{-}}\DecValTok{158}\NormalTok{, }\CommentTok{\# Set bounds}
+\NormalTok{           Lat }\SpecialCharTok{\textgreater{}} \DecValTok{21}\NormalTok{,    }
+\NormalTok{           Lat }\SpecialCharTok{\textless{}} \DecValTok{22}\NormalTok{)    }
+  
+  \CommentTok{\#I wanted to define manual colors for mullet zones}
+\NormalTok{  zone\_colors }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}
+    \StringTok{"Mullet East"} \OtherTok{=} \StringTok{"gold"}\NormalTok{,}
+    \StringTok{"Mullet West"} \OtherTok{=} \StringTok{"darkgreen"}\NormalTok{,}
+    \StringTok{"Mullet South"} \OtherTok{=} \StringTok{"royalblue"}\NormalTok{,}
+    \StringTok{"Mullet North"} \OtherTok{=} \StringTok{"red"}
+\NormalTok{  )}
+  
+  \CommentTok{\#i created a color palette function with the colors}
+\NormalTok{  pal }\OtherTok{\textless{}{-}} \FunctionTok{colorFactor}\NormalTok{(}\AttributeTok{palette =}\NormalTok{ zone\_colors, }\AttributeTok{domain =}\NormalTok{ heeiamap\_data}\SpecialCharTok{$}\NormalTok{Zone)}
+  
+  \CommentTok{\#Using the leaflet package i made my maps! creates a map using my heeiamap\_data}
+  \FunctionTok{leaflet}\NormalTok{(heeiamap\_data) }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{addTiles}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{setView}\NormalTok{(}\AttributeTok{lng =} \SpecialCharTok{{-}}\FloatTok{157.8060}\NormalTok{, }\AttributeTok{lat =} \FloatTok{21.4351}\NormalTok{, }\AttributeTok{zoom =} \DecValTok{16}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} \CommentTok{\#same as bounds and cenyers it on my heʻeia coordinates}
+    
+    \CommentTok{\#here i added in circle markers to represent my sample sites on the maps}
+    \FunctionTok{addCircleMarkers}\NormalTok{(}
+    \AttributeTok{lng =} \SpecialCharTok{\textasciitilde{}}\NormalTok{Long,      }\CommentTok{\#longitude from data}
+    \AttributeTok{lat =} \SpecialCharTok{\textasciitilde{}}\NormalTok{Lat,       }\CommentTok{\#latitude from data}
+    \AttributeTok{popup =} \SpecialCharTok{\textasciitilde{}}\NormalTok{popup\_content,  }\CommentTok{\#brings up popup only when clicked}
+    \AttributeTok{color =} \SpecialCharTok{\textasciitilde{}}\FunctionTok{pal}\NormalTok{(Zone),     }\CommentTok{\#uses my color pal for zones}
+    \AttributeTok{radius =} \DecValTok{8}\NormalTok{,            }\CommentTok{\#changes the size of circle markers  on map}
+    \AttributeTok{fillOpacity =} \FloatTok{0.7}\NormalTok{,     }\CommentTok{\#70\% opacity for circle markers}
+    \AttributeTok{stroke =} \ConstantTok{TRUE}\NormalTok{,         }\CommentTok{\#added an outer border}
+    \AttributeTok{weight =} \DecValTok{1}            \CommentTok{\#and a thickness to boarder}
+\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{addLegend}\NormalTok{(}
+      \AttributeTok{position =} \StringTok{"bottomright"}\NormalTok{,}
+      \AttributeTok{pal =}\NormalTok{ pal,  }\CommentTok{\# Use the same custom palette}
+      \AttributeTok{values =} \SpecialCharTok{\textasciitilde{}}\NormalTok{Zone,}
+      \AttributeTok{title =} \FunctionTok{paste}\NormalTok{(season\_name, }\StringTok{"Mullet Sampling Sites"}\NormalTok{),}
+      \AttributeTok{opacity =} \FloatTok{0.7}
+\NormalTok{    )}
+\NormalTok{\}}
+
+\CommentTok{\# Create seasonal datasets}
+\NormalTok{dry\_season\_data }\OtherTok{\textless{}{-}}\NormalTok{ grainsize\_filter }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{filter}\NormalTok{(Date }\SpecialCharTok{==} \StringTok{"9/14/23"}\NormalTok{)}
+\NormalTok{wet\_season\_data }\OtherTok{\textless{}{-}}\NormalTok{ grainsize\_filter }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{filter}\NormalTok{(Date }\SpecialCharTok{==} \StringTok{"12/20/23"}\NormalTok{)}
+
+\CommentTok{\# Generate and display maps}
+\NormalTok{dry\_map }\OtherTok{\textless{}{-}} \FunctionTok{heeiamap}\NormalTok{(dry\_season\_data, }\StringTok{"Dry Season"}\NormalTok{)}
+\NormalTok{wet\_map }\OtherTok{\textless{}{-}} \FunctionTok{heeiamap}\NormalTok{(wet\_season\_data, }\StringTok{"Wet Season"}\NormalTok{)}
+
+\CommentTok{\# Display maps}
+\NormalTok{dry\_map}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{wet\_map}
+\end{Highlighting}
+\end{Shaded}
+
+
+\end{document}
