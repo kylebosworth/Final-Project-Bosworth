@@ -1,0 +1,193 @@
+---
+title: "MBIO 612 Final Project - Grain Size Distribution - Wet vs. Dry Seasons"
+author: "Kyle Bosworth"
+date: "`r Sys.Date()`"
+output:
+  pdf_document:
+    toc: true
+  html_document:
+    toc: true
+    toc_float: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,
+                      message = FALSE,
+                      warning = FALSE,
+                      fig.path = "../outputs/")
+knitr::opts_chunk$set(dev = "png", 
+                      fig.path = "../outputs/",
+                      fig.width = 7,
+                      fig.height = 5)
+```
+
+### Load Libraries
+```{r}
+library(here)
+library(tidyverse)
+library(leaflet)
+library(tidyr)
+
+```
+
+### Read in Data
+```{r}
+#Had to manually load grainsize data. For some reason I could not get R to read in my csv file.
+
+grainsize <- read.csv("/Users/boz/Desktop/Repositories/MGP_bosworth/data/grainsize.csv")
+
+grainsize <- read.csv(here("data", "grainsize.csv"))
+
+head(grainsize)
+
+#Had a lot of trouble with my naming schemes in my data frame, here i just wanted to double check my names
+str(grainsize$SiteName)  # Should show character vector with names as MW_B5 not MW-B5
+
+#Checked a few example site names too
+head(unique(grainsize$SiteName))
+
+```
+
+### The Goal
+I just wanted to focus on 2 sampling dates that occured in the dry and wet season, 9/14/23 and 12/20/23, my goald is to create map that will display grain size % and WQ data in an interactive form. Iʻd like to me able to make a story map of sorts and each site will have a pop up window that displays info for that day. 
+
+
+### Data Prep
+```{r}
+#I want to first clean and prepare my data to remove NAs, and focus on spcific dates
+
+grainsize_filter <- grainsize %>%
+  mutate(
+    Long = as.numeric(gsub("_", "-", as.character(Long))),
+    Lat = as.numeric(as.character(Lat)) #this converts my long/lat values to numeric to makes sure that they are read in coordinate format. I replaced my "hypnons "-" with underscores and didnʻt want to go back and edi out each cell.
+  ) %>%
+  filter(!is.na(Long), !is.na(Lat)) %>%
+  filter(Date %in% c("9/14/23", "12/20/23")) %>% # Remove rows where coordinates are NA and selecting for dates. 
+  mutate(
+    Gravel_pct = (Gravel/TotalWeight) * 100,
+    CoarseSand_pct = (CoarseSand/TotalWeight) * 100,
+    MediumSand_pct = (MediumSand/TotalWeight) * 100,
+    FineSand_pct = (FineSand/TotalWeight) * 100,
+    SiltClay_pct = (SiltClay/TotalWeight) * 100
+  )
+#here i calculated my grain size % based on total weight so that in my map i can view this as a percentage.
+
+
+#I then thought that it might be easier to view all this dat if I made 2 different map. So i created 2 distinct seasonal data sets.
+
+dry_season_data <- grainsize_filter %>% 
+  filter(Date == "9/14/23")
+
+wet_season_data <- grainsize_filter %>% 
+  filter(Date == "12/20/23")
+```
+
+
+### Creating a pop-up
+```{r}
+
+#I would like to depict the sampling points on an interactive map that has a window that pops up when you click on a specific site. 
+
+#I did some researching and found that I could make a pop-up using "popup_content" and structure the text using using html tags!
+#the basics are as followed 
+
+
+#"<strong>" wraps the lables 
+#"<br/>" is a break and is used to create the next line
+#round was used to round my percents, coordinates and data off to a degree.
+
+
+
+#Line 1: "<strong>Environmental Parameters:</strong><br/>",
+#Line 2: "<strong>Environmental Parameters:</strong><br/>",
+
+
+grainsize_filter <- grainsize_filter %>%
+  mutate(
+    popup_content = paste(
+      "<strong>Site:</strong>", SiteName, "<br/>",
+      "<strong>Zone:</strong>", Zone, "<br/>",
+      "<strong>Coordinates:</strong><br/>",
+      "Lat: ", round(Lat, 6), "<br/>",
+      "Long: ", round(Long, 6), "<br/>",
+      "<strong>Grain Size Distribution:</strong><br/>",
+      "Gravel: ", round(Gravel_pct, 1), "%<br/>",
+      "Coarse Sand: ", round(CoarseSand_pct, 1), "%<br/>",
+      "Medium Sand: ", round(MediumSand_pct, 1), "%<br/>",
+      "Fine Sand: ", round(FineSand_pct, 1), "%<br/>",
+      "Silt/Clay: ", round(SiltClay_pct, 1), "%<br/>",
+      "<strong>Environmental Parameters:</strong><br/>",
+      "Temperature: ", round(TempC, 2), "°C<br/>",
+      "Salinity: ", round(Salinity, 2), "<br/>",
+      "DO%: ", round(DO, 2)
+    )
+  )
+```
+
+### Adding in the map + Heʻeia Fishpond Coordinates
+```{r}
+
+heeia_lat <- 21.4351  # This is the coordinates i used for my map layer
+heeia_lng <- -157.8060
+
+heeiamap <- function(data, season_name) {
+  heeiamap_data <- data %>%
+    filter(!is.na(Long), !is.na(Lat),
+           Long < 0,  #makes sure that my longitude is negative (for Hawaiʻi), chk for me as my long had underscores
+           Long > -158, # Set bounds
+           Lat > 21,    
+           Lat < 22)    
+  
+  #I wanted to define manual colors for mullet zones
+  zone_colors <- c(
+    "Mullet East" = "gold",
+    "Mullet West" = "darkgreen",
+    "Mullet South" = "royalblue",
+    "Mullet North" = "red"
+  )
+  
+  #i created a color palette function with the colors
+  pal <- colorFactor(palette = zone_colors, domain = heeiamap_data$Zone)
+  
+  #Using the leaflet package i made my maps! creates a map using my heeiamap_data
+  leaflet(heeiamap_data) %>%
+    addTiles() %>%
+    setView(lng = -157.8060, lat = 21.4351, zoom = 16) %>% #same as bounds and cenyers it on my heʻeia coordinates
+    
+    #here i added in circle markers to represent my sample sites on the maps
+    addCircleMarkers(
+    lng = ~Long,      #longitude from data
+    lat = ~Lat,       #latitude from data
+    popup = ~popup_content,  #brings up popup only when clicked
+    color = ~pal(Zone),     #uses my color pal for zones
+    radius = 8,            #changes the size of circle markers  on map
+    fillOpacity = 0.7,     #70% opacity for circle markers
+    stroke = TRUE,         #added an outer border
+    weight = 1            #and a thickness to boarder
+) %>%
+    addLegend(
+      position = "bottomright",
+      pal = pal,  # Use the same custom palette
+      values = ~Zone,
+      title = paste(season_name, "Mullet Sampling Sites"),
+      opacity = 0.7
+    )
+}
+
+# Create seasonal datasets
+dry_season_data <- grainsize_filter %>% 
+  filter(Date == "9/14/23")
+wet_season_data <- grainsize_filter %>% 
+  filter(Date == "12/20/23")
+
+# Generate and display maps
+dry_map <- heeiamap(dry_season_data, "Dry Season")
+wet_map <- heeiamap(wet_season_data, "Wet Season")
+
+# Display maps
+dry_map
+wet_map
+
+
+```
+
