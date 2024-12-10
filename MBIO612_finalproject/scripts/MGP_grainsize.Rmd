@@ -46,6 +46,20 @@ str(grainsize$SiteName)  # Should show character vector with names as MW_B5 not 
 head(unique(grainsize$SiteName))
 
 ```
+### The Mullet Gut Project
+
+
+
+
+```{r include_image, echo=FALSE, out.width='70%', fig.align='center'}
+knitr::include_graphics("~/Desktop/Repositories/Final Project Bosworth/MBIO612_finalproject/image.png")
+
+```
+
+
+
+
+
 
 ### The Goal
 I just wanted to focus on 2 sampling dates that occured in the dry and wet season, 9/14/23 and 12/20/23, my goald is to create map that will display grain size % and WQ data in an interactive form. Iʻd like to me able to make a story map of sorts and each site will have a pop up window that displays info for that day. 
